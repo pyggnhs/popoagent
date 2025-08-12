@@ -1,4 +1,5 @@
 import os
+
 from jinja2 import Environment, FileSystemLoader
 
 def load_prompt_template(template_name: str, **kwargs):
