@@ -138,7 +138,7 @@ def get_project_structure() -> Optional[RepoInfo]:
         return RepoInfo(
             currentDirectory=current_dir,
             rootPath=root_path,
-            repoURL=repo_url,
+            repoUrl=repo_url,
             repoPath=root_path,
             Branch=current_branch,
             status=status_info,
@@ -232,7 +232,7 @@ if __name__ == "__main__":
             print("项目仓库信息:")
             print(f"当前目录: {repo_info.currentDirectory}")
             print(f"仓库根目录: {repo_info.rootPath}")
-            print(f"仓库URL: {repo_info.repoURL}")
+            print(f"仓库URL: {repo_info.repoUrl}")
             print(f"仓库路径: {repo_info.repoPath}")
             print(f"当前分支: {repo_info.Branch}")
             print(f"状态: {repo_info.status}")
