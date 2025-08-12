@@ -7,6 +7,4 @@ def load_prompt_template(template_name: str, **kwargs):
     template = env.get_template(f"{template_name}.jinja-md")
     return template.render(**kwargs)
 
-
-
-# print(load_prompt_template("code_sys", context="abc"))
+    # print(load_prompt_template("code_sys", context="abc"))
