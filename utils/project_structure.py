@@ -219,14 +219,14 @@ def class_to_xml(obj:Any,root_tag:str = None) -> str:
         parsed_xml = minidom.parseString(rough_xml)
         return parsed_xml.toprettyxml(indent="  ")
 
-    def get_project_structure_xml() -> Optional[str]:
+def get_project_structure_xml() -> Optional[str]:
         """获取项目仓库信息并返回 XML 字符串"""
         repo_info = get_project_structure()
         if repo_info:
             return class_to_xml(repo_info)
         return None
 
-    if __name__ == "__main__":
+if __name__ == "__main__":
         repo_info = get_project_structure()
         if repo_info:
             print("项目仓库信息:")
