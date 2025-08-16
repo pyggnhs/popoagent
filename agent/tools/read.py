@@ -77,3 +77,7 @@ def read(file_path: str, offset: int = 1, limit: int = 2000) -> str:
     )
 
     return header + "\n" + result
+
+if __name__ == '__main__':
+    ret=read("/Users/yanpeng/popoagent/agent/tools/read.py",5,5)
+    print(ret)
