@@ -22,7 +22,7 @@ def query(question: str):
 
 
 if __name__ == "__main__":
-    #question = "当前项目是如何实现读文件的"
+    question = "当前项目的代码用了哪些核心技术"
     #question = "帮我查找项目中有关提示词模板的内容"
-    question = "最近代码得提交内容是什么，提交人是谁"
+    #question = "最近代码得提交内容是什么，提交人是谁"
     query(question)
