@@ -46,7 +46,7 @@ def get_project_structure() -> Optional[RepoInfo]:
             stderr=subprocess.STDOUT,
             text=True
         ).strip()
-        repo_url = "git@github.com:pyggnhs/popoagent.git"
+        repo_url = ""
         for line in remote_info.split('\n'):
             if line.startswith('origin') and 'fetch' in line:
                 repo_url = line.split()[1]
@@ -174,11 +174,11 @@ def class_to_xml(obj:Any,root_tag:str = None) -> str:
         root_tag = obj.__class__.__name__.lower()
     root = Element(root_tag)
 
-    def build_xml(element:Element,name,str,value:Any):
+    def build_xml(element:Element,name:str,value:Any):
         #处理基本类型（字符串、数字、布尔值、None)
         if isinstance(value,(str,int,float,bool,type(None))):
             elem = SubElement(element,name)
-            elem.text = str(value).lower() if isinstance(value,str) else value
+            elem.text = str(value).lower() if isinstance(value,bool) else str(value)
             return
 
         #处理列表/元组等可迭代对象
@@ -208,16 +208,16 @@ def class_to_xml(obj:Any,root_tag:str = None) -> str:
                     build_xml(dict_elem, safe_key, val)
                 return
 
-        # 遍历当前类实例的所有属性（排除私有属性）
-        for attr_name, attr_value in obj.__dict__.items():
-            if not attr_name.startswith('__'):  # 跳过__module__、__doc__等内置属性
-                safe_attr_name = attr_name.replace("_", "-").lower()
-                build_xml(root, safe_attr_name, attr_value)
+    # 遍历当前类实例的所有属性（排除私有属性）
+    for attr_name, attr_value in obj.__dict__.items():
+        if not attr_name.startswith('__'):  # 跳过__module__、__doc__等内置属性
+            safe_attr_name = attr_name.replace("_", "-").lower()
+            build_xml(root, safe_attr_name, attr_value)
 
-        # 格式化XML（增加缩进和换行）
-        rough_xml = tostring(root, 'utf-8')
-        parsed_xml = minidom.parseString(rough_xml)
-        return parsed_xml.toprettyxml(indent="  ")
+    # 格式化XML（增加缩进和换行）
+    rough_xml = tostring(root, 'utf-8')
+    parsed_xml = minidom.parseString(rough_xml)
+    return parsed_xml.toprettyxml(indent="  ")
 
 def get_project_structure_xml() -> Optional[str]:
         """获取项目仓库信息并返回 XML 字符串"""
